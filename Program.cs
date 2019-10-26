@@ -56,6 +56,36 @@ namespace BlogsConsole
 
                         db.AddBlog(blog);
                         logger.Info("Blog added - {name}", name);
+                        done = false;
+                    }
+
+                    else if (choice == "3")
+                    {
+                        // Display all Blogs from the database for user to choose from
+                        Console.WriteLine("Which blog would you like to create a post for?");
+                        var query = db.Blogs.OrderBy(b => b.BlogId);
+                        foreach (var item in query)
+                        {
+                            Console.WriteLine( item.BlogId + ") " + item.Name);
+                        }
+                        Console.Write("==> ");
+                        int blogChoice = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine("");
+
+                        Console.Write("Enter title of post: ");
+                        var title = Console.ReadLine();
+                        Console.Write("Enter post content: ");
+                        var content = Console.ReadLine();
+                        var post = new Post { Title = title, Content = content, BlogId = blogChoice };
+
+                        db.AddPost(post);
+                        logger.Info("Post added - {title}", title);
+                        done = false;
+
+                    }
+                    else if(choice == "4")
+                    {
+                        done = true;
                     }
                 }
                 while (!done);
