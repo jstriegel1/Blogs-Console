@@ -32,12 +32,14 @@ namespace BlogsConsole
                     if (choice == "1")
                     {
                         // Display all Blogs from the database
-                        var query = db.Blogs.OrderBy(b => b.BlogId);
+                        var query = db.Blogs.OrderBy(b => b.Name);
 
                         Console.WriteLine("All blogs in the database:");
+                        int i = 1;
                         foreach (var item in query)
                         {
-                            Console.WriteLine(item.BlogId + ") " + item.Name);
+                            Console.WriteLine( i + ") " + item.Name);
+                            i++;
                         }
                         Console.WriteLine("");
                         done = false;
