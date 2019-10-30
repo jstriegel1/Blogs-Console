@@ -35,6 +35,9 @@ namespace BlogsConsole
                         logger.Info("Option 1 selected");
                         // Display all Blogs from the database
                         var query = db.Blogs.OrderBy(b => b.Name);
+                        int quantity = query.Count();
+                        Console.WriteLine("{0} blog(s) returned", quantity);
+                        Console.WriteLine("");
 
                         Console.WriteLine("All blogs in the database:");
                         int i = 1;
