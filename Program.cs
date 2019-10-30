@@ -32,6 +32,7 @@ namespace BlogsConsole
 
                     if (choice == "1")
                     {
+                        logger.Info("Option 1 selected");
                         // Display all Blogs from the database
                         var query = db.Blogs.OrderBy(b => b.Name);
 
@@ -48,6 +49,7 @@ namespace BlogsConsole
                     
                     else if (choice == "2")
                     {
+                        logger.Info("Option 2 selected");
                         // Create and save a new Blog
                         Console.Write("Enter a name for a new Blog: ");
                         var name = Console.ReadLine();
@@ -62,6 +64,7 @@ namespace BlogsConsole
 
                     else if (choice == "3")
                     {
+                        logger.Info("Option 3 selected");
                         // Display all Blogs from the database for user to choose from
                         Console.WriteLine("Which blog would you like to create a post for?");
                         var query = db.Blogs.OrderBy(b => b.BlogId);
@@ -86,6 +89,7 @@ namespace BlogsConsole
                     }
                     else if(choice == "4")
                     {
+                        logger.Info("Option 4 selected");
                         
                     }
 
