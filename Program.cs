@@ -128,6 +128,35 @@ namespace BlogsConsole
                     else if(choice == "4")
                     {
                         logger.Info("Option 4 selected");
+                        Console.WriteLine("Select which blog's posts you would like displayed:");
+                        Console.WriteLine("0) Posts from All Blogs");
+                        var query = db.Blogs.OrderBy(b => b.BlogId);
+                        foreach (var item in query)
+                        {
+                            Console.WriteLine(item.BlogId + ") Posts from " + item.Name);
+                        }
+                        Console.Write("==> ");
+                        string postChoice = Console.ReadLine();
+                        Console.WriteLine("");
+                        logger.Info("Option {0} selected", postChoice);
+                        if (postChoice == "0")
+                        {
+                            int quantity = db.Posts.Count();
+                            Console.WriteLine("{0} post(s) returned", quantity);
+                            var postQuery = db.Posts;
+                            foreach (var postItem in postQuery)
+                            {
+                                Console.WriteLine("Blog: {0}", postItem.BlogId);
+                                Console.WriteLine("Title: {0}", postItem.Title);
+                                Console.WriteLine("Content: {0}", postItem.Content);
+                                Console.WriteLine("");
+                            }
+
+                        }
+                        foreach (var item in query)
+                        {
+
+                        }
                         
                     }
 
