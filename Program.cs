@@ -141,21 +141,33 @@ namespace BlogsConsole
                         logger.Info("Option {0} selected", postChoice);
                         if (postChoice == "0")
                         {
-                            int quantity = db.Posts.Count();
-                            Console.WriteLine("{0} post(s) returned", quantity);
                             var postQuery = db.Posts;
+                            int quantity = postQuery.Count();
+                            Console.WriteLine("{0} post(s) returned", quantity);
+                            Console.WriteLine("");
                             foreach (var postItem in postQuery)
                             {
-                                Console.WriteLine("Blog: {0}", postItem.BlogId);
+                                Console.WriteLine("Blog: {0}", postItem.Blog.Name);
                                 Console.WriteLine("Title: {0}", postItem.Title);
                                 Console.WriteLine("Content: {0}", postItem.Content);
                                 Console.WriteLine("");
                             }
 
                         }
-                        foreach (var item in query)
+                        else
                         {
-
+                            int postId = Int32.Parse(postChoice);
+                            var postQuery = db.Posts.Where(p => p.BlogId == postId);
+                            int quantity = postQuery.Count();
+                            Console.WriteLine("{0} post(s) returned", quantity);
+                            Console.WriteLine("");
+                            foreach (var postItem in postQuery)
+                            {
+                                Console.WriteLine("Blog: {0}", postItem.Blog.Name);
+                                Console.WriteLine("Title: {0}", postItem.Title);
+                                Console.WriteLine("Content: {0}", postItem.Content);
+                                Console.WriteLine("");
+                            }
                         }
                         
                     }
