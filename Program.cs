@@ -57,12 +57,20 @@ namespace BlogsConsole
                         Console.Write("Enter a name for a new Blog: ");
                         var name = Console.ReadLine();
 
-                        var blog = new Blog { Name = name };
+                        if(name == "")
+                        {
+                            logger.Error("Blog name cannot be null");
+                            Console.WriteLine("");
+                        }
+                        else
+                        {
+                            var blog = new Blog { Name = name };
 
 
-                        db.AddBlog(blog);
-                        logger.Info("Blog added - {name}", name);
-                        done = false;
+                            db.AddBlog(blog);
+                            logger.Info("Blog added - {name}", name);
+                            done = false;
+                        }
                     }
 
                     else if (choice == "3")
@@ -76,18 +84,45 @@ namespace BlogsConsole
                             Console.WriteLine( item.BlogId + ") " + item.Name);
                         }
                         Console.Write("==> ");
-                        int blogChoice = Int32.Parse(Console.ReadLine());
-                        Console.WriteLine("");
+                        try
+                        {
+                            int blogChoice = Int32.Parse(Console.ReadLine());
+                            Console.WriteLine("");
 
-                        Console.Write("Enter title of post: ");
-                        var title = Console.ReadLine();
-                        Console.Write("Enter post content: ");
-                        var content = Console.ReadLine();
-                        var post = new Post { Title = title, Content = content, BlogId = blogChoice };
+                            if(blogChoice < 0 || blogChoice > query.Count())
+                            {
+                                logger.Error("There are no Blogs saved with that Id");
+                                Console.WriteLine("");
+                            }
+                            else
+                            {
+                                Console.Write("Enter title of post: ");
+                                var title = Console.ReadLine();
+                                if (title == "")
+                                {
+                                    logger.Error("Post title cannot be null");
+                                    Console.WriteLine("");
+                                }
+                                else
+                                {
+                                    Console.Write("Enter post content: ");
+                                    var content = Console.ReadLine();
+                                    var post = new Post { Title = title, Content = content, BlogId = blogChoice };
 
-                        db.AddPost(post);
-                        logger.Info("Post added - {title}", title);
-                        done = false;
+                                    db.AddPost(post);
+                                    Console.WriteLine("");
+                                    logger.Info("Post added - {title}", title);
+                                    Console.WriteLine("");
+                                    done = false;
+                                }
+                                    
+                            }    
+                        }
+                        catch
+                        {
+                            logger.Error("Invalid Blog Id");
+                            Console.WriteLine("");
+                        }
 
                     }
                     else if(choice == "4")
