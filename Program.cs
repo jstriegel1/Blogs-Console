@@ -23,7 +23,8 @@ namespace BlogsConsole
                     Console.WriteLine("1) Display All Blogs");
                     Console.WriteLine("2) Add a Blog");
                     Console.WriteLine("3) Create a Post");
-                    Console.WriteLine("4) Exit");
+                    Console.WriteLine("4) Display Posts");
+                    Console.WriteLine("5) Exit");
                     Console.Write("==> ");
                     
                     string choice = Console.ReadLine();
@@ -84,6 +85,11 @@ namespace BlogsConsole
 
                     }
                     else if(choice == "4")
+                    {
+                        
+                    }
+
+                    else if(choice == "5")
                     {
                         done = true;
                     }
